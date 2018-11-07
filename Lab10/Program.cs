@@ -11,28 +11,23 @@ namespace Lab10
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Circle Tester");
-            bool realDouble = false;
-            double radius=-1;
-            while (realDouble == false || radius <= 0)
+            int numberOfCircles = 0;
+            bool continueTheProgram = true;
+            while (continueTheProgram == true)
             {
-                Console.Write("Enter radius: ");
-                string input = Console.ReadLine();
-                realDouble = double.TryParse(input, out radius);
+                double radius = Validate.Radius();
+                var newCircle = new Circle(radius);
 
-                if (radius <= 0)
-                {
-                    Console.WriteLine("Sorry, that is not a valid radius.  It must a number greater then zero.");
-                }
+                string formmatedCircumfernece = newCircle.CalculateFormattedCircumference(newCircle.Radius);
+                Console.WriteLine($"Circumference: {formmatedCircumfernece}");
+                string formmatedArea = newCircle.CalculateFormattedArea(newCircle.Radius);
+                Console.WriteLine($"Area: {formmatedArea}");
+                numberOfCircles++;
+                continueTheProgram = Validate.ContinueTheProgram();
             }
-            var newCircle = new Circle(radius);
 
-            Console.WriteLine(newCircle.Radius);
-            string formmatedCircumfernece =  newCircle.CalculateFormattedCircumference(newCircle.Radius);
-            Console.WriteLine($"Circumference: {formmatedCircumfernece}");
-            string formmatedArea = newCircle.CalculateFormattedArea(newCircle.Radius);
-            Console.WriteLine($"Area: {formmatedArea}");
+            Console.WriteLine($"Goodbye! You created {numberOfCircles} Circle object(s).");
             Console.ReadKey();
-
         }
     }
 }
